@@ -1,44 +1,6 @@
 import numpy as np
-import matplotlib.pyplot as plt
+from Visualization import plot_three_waves
 
-class Wave(object):
-    def __init__(self, period, on_duration, offset):
-        self.period = period
-        self.on_duration = on_duration
-        self.offset = offset
-def plot_three_waves(wave1, wave2, modified_wave2):
-    # ---------------------------
-    # Plotting All Waves in One Figure (Three Subplots)
-    # ---------------------------
-    fig, axs = plt.subplots(3, 1, figsize=(12, 10), sharex=True)
-
-    # Subplot 1: Wave 1 (Priority)
-    axs[0].step(t, wave1, where='post', color='blue')
-    axs[0].set_title("Wave 1 (Priority)")
-    axs[0].set_ylabel("Signal Level")
-    axs[0].set_ylim(-0.2, 1.2)
-    axs[0].grid(True)
-    axs[0].set_xticks(np.arange(0, T_total + 1, 1))
-
-    # Subplot 2: Original Wave 2
-    axs[1].step(t, wave2, where='post', color='green')
-    axs[1].set_title("Original Wave 2")
-    axs[1].set_ylabel("Signal Level")
-    axs[1].set_ylim(-0.2, 1.2)
-    axs[1].grid(True)
-    axs[1].set_xticks(np.arange(0, T_total + 1, 1))
-
-    # Subplot 3: Modified (Retimed) Wave 2
-    axs[2].step(t, modified_wave2, where='post', color='red', linewidth=2)
-    axs[2].set_title("Modified (Retimed) Wave 2")
-    axs[2].set_xlabel("Time (s)")
-    axs[2].set_ylabel("Signal Level")
-    axs[2].set_ylim(-0.2, 1.2)
-    axs[2].grid(True)
-    axs[2].set_xticks(np.arange(0, T_total + 1, 1))
-
-    plt.tight_layout()
-    plt.show()
 def generate_custom_wave(t, period, on_duration, offset=0):
     """
     Generate a square wave that is HIGH (1) for a duration of 'on_duration'
@@ -138,6 +100,6 @@ if __name__ == '__main__':
     print("Total modified Wave 2 up time: {:.3f} s".format(total_new_up_time))
     print("Slowdown factor (new up time / original up time): {:.3f}".format(slowdown))
 
-    plot_three_waves(wave1, wave2, modified_wave2)
+    plot_three_waves(t, T_total, wave1, wave2, modified_wave2)
 
 
